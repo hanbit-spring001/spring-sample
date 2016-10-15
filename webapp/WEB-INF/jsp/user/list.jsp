@@ -7,9 +7,14 @@
 <title>사용자 목록</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <style type="text/css">
-.signup-form {
+.signup-form, .koala {
+	display: inline-block;
 	padding: 30px;
-	width: 400px;
+	width: 45%;
+}
+
+.koala img {
+	width: 100%;
 }
 
 #btnSignup {
