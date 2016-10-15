@@ -48,6 +48,9 @@
   		</div>
   		<button id="btnSignup" class="btn btn-success">회원가입</button>
   </div>
+  <div class="koala">
+  	<img src="/file/Koala.jpg">
+  </div>
 
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -96,16 +99,37 @@ $(function() {
 			userPassword: userPassword
 		};
 		
-		callAjax({
-			url: "/api/user/add",
-			method: "POST",
-			contentType: "application/json;charset=utf-8",
-			dataType: "json",
-			data: JSON.stringify(userData),
-			success: function (user) {
-				console.log(user);
-			}
-		});
+		var formData = new FormData();
+		formData.append("userEmail", userEmail);
+		formData.append("userPassword", userPassword);
+		
+		var userPhoto = $("#userPhoto")[0].files[0];
+		
+		if (userPhoto) {
+			formData.append("userPhoto", userPhoto);
+			
+			callAjax({
+				url: "/api/user/add",
+				method: "POST",
+				contentType: false,
+				processData: false,
+				data: formData,
+				success: function (user) {
+					alert(user.userEmail + " 가입완료");
+				}
+			});
+		}
+		else {
+			callAjax({
+				url: "/api/user/add",
+				method: "PUT",
+				contentType: "application/json;charset=utf-8",
+				data: JSON.stringify(userData),
+				success: function (user) {
+					alert(user.userEmail + " 가입완료");
+				}
+			});
+		}
 	});
 });
 </script>
